@@ -1,11 +1,13 @@
 package app.boboc.demogateway
 
+import app.boboc.demogateway.config.JwtProperties
 import app.boboc.demogateway.entity.UserEntity
 import app.boboc.demogateway.repository.UserRepository
 import io.r2dbc.spi.ConnectionFactory
 import kotlinx.coroutines.flow.toList
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.core.io.ClassPathResource
@@ -13,8 +15,10 @@ import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
+@EnableConfigurationProperties(JwtProperties::class)
 @SpringBootApplication
 class DemoGatewayApplication{
     @Bean
@@ -35,3 +39,4 @@ class DemoGatewayApplication{
 fun main(args: Array<String>) {
     runApplication<DemoGatewayApplication>(*args)
 }
+
