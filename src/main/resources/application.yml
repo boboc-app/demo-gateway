@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: demo-gateway
+  r2dbc:
+    name: test
+    url: r2dbc:h2:mem://~/test
+
+
+
