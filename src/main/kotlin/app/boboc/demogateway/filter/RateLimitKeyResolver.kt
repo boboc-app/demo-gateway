@@ -6,10 +6,12 @@ import app.boboc.demogateway.repository.UserRepository
 import kotlinx.coroutines.reactor.mono
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver
 import org.springframework.http.HttpHeaders
+import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
 
-class CustomKeyResolver(
+@Component
+class RateLimitKeyResolver(
     private val jwtProperties: JwtProperties,
     private val userRepository: UserRepository
 ) : KeyResolver {
