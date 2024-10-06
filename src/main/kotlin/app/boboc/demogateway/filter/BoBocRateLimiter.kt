@@ -14,16 +14,31 @@ class BoBocRateLimiter(
     CONFIGURATION_PROPERTY_NAME,
     configurationService
 ) {
-    companion object{
+    companion object {
         const val CONFIGURATION_PROPERTY_NAME = "boboc-rate-limiter"
         const val ACCOUNT_RATE_LIMIT_HEADER = "X-Boboc-Ratelimt"
+        const val ACCOUNT_CAPACITY_HEADER = "X-Boboc-Capacity"
+        const val DEFAULT_RECOVER_IN = 3600
+        const val DEFAULT_MAXIMUM_CAPACITY = 10
     }
 
     data class Config(
-        val a: String
+        val maximumCapacity: Int? = null,
+        val recoverIn: Int = DEFAULT_RECOVER_IN,
     )
 
-    override fun isAllowed(routeId: String?, id: String?): Mono<RateLimiter.Response> {
+    fun getHeader(config: Config, currentCount: Int): Map<String, Int> {
+        return mapOf(
+            ACCOUNT_CAPACITY_HEADER to (config.maximumCapacity ?: DEFAULT_MAXIMUM_CAPACITY),
+            ACCOUNT_RATE_LIMIT_HEADER to currentCount
+        )
+    }
+
+    override fun isAllowed(routeId: String, id: String): Mono<RateLimiter.Response> {
+        println(id)
+
+        config[routeId]
+
         TODO("Not yet implemented")
     }
 
